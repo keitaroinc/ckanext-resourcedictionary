@@ -1,3 +1,4 @@
+[![Tests](https://github.com/keitaroinc/ckanext-resourcedictionary/workflows/Tests/badge.svg?branch=main)](https://github.com/keitaroinc/ckanext-resourcedictionary/actions)
 
 # ckanext-resourcedictionary
 
