@@ -1,0 +1,4 @@
+dictionary_form:
+  output: resourcedictionary/%(version)s_dictionary_form.js
+  contents:
+    - js/dictionary_form.js

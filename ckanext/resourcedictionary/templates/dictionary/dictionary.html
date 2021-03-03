@@ -1,0 +1,34 @@
+{% extends "package/resource_edit_base.html" %}
+
+{% block scripts %}
+  {{ super() }}
+  {% asset 'resourcedictionary/dictionary_form' %}
+{% endblock %}
+
+
+{% import 'macros/form.html' as form %}
+
+{% block subtitle %}{{ h.dataset_display_name(pkg) }} - {{ h.resource_display_name(res) }}{% endblock %}
+
+{% block primary_content_inner %}
+
+  {% set action = h.url_for('resource_dictionary.dictionary', id=pkg.name, resource_id=res.id) %}
+
+  <form method="post" action="{{ action }}" data-module="dictionary_form">
+
+    {% block dictionary_form %}
+      {% for field in fields %}
+          {% snippet "ajax_snippets/dictionary_field.html", field=field, position=loop.index %}
+      {% endfor %}
+    {% endblock %}
+
+    <button class="btn btn-primary" id="dictionary-save-button" name="save" type="submit">
+      <i class="fa fa-book"></i> {{ _('Save') }}
+    </button>
+
+    <a class="btn btn-info pull-right" id="add-field-button">
+      <span class="fa fa-plus-square"></span>
+      <span class="fa-label">{{_('Add Field')}}</span>
+    </a>
+  </form>
+{% endblock %}

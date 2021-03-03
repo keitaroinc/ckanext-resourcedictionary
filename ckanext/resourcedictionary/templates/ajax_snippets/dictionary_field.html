@@ -1,0 +1,80 @@
+{% import 'macros/form.html' as form %}
+
+{#
+  Data Dictionary fields may be added this snippet. New fields following
+  the 'info__' ~ position ~ '__namegoeshere' convention will be saved
+  as part of the "info" object on the column.
+#}
+<div class="dictionary-field-{{ position }}">
+  {% if field %}
+
+    {{ form.input('field__' ~ position ~ '__id',
+      label=_('Field ID'), id='field-f' ~ position ~ 'id',
+      value=field.get('id'), classes=['control-full']) }}
+
+    {{ form.select('info__' ~ position ~ '__type',
+      label=_('Type'), options=[
+      {'name': '', 'value': ''},
+      {'name': 'text', 'value': 'text'},
+      {'name': 'numeric', 'value': 'numeric'},
+      {'name': 'timestamp', 'value': 'timestamp'},
+      ], selected=field.get('type')) }}
+
+    {{ form.select('info__' ~ position ~ '__type_override',
+      label=_('Type Override'), options=[
+      {'name': '', 'value': ''},
+      {'name': 'text', 'value': 'text'},
+      {'name': 'numeric', 'value': 'numeric'},
+      {'name': 'timestamp', 'value': 'timestamp'},
+      ], selected=field.get('info', {}).get('type_override', '')) }}
+
+    {{ form.input('info__' ~ position ~ '__label',
+      label=_('Label'), id='field-f' ~ position ~ 'label',
+      value=field.get('info', {}).get('label', ''), classes=['control-full']) }}
+
+    {{ form.markdown('info__' ~ position ~ '__notes',
+      label=_('Description'), id='field-d' ~ position ~ 'notes',
+      value=field.get('info', {}).get('notes', '')) }}
+
+  {% else %}
+
+    {{ form.input('field__' ~ position ~ '__id',
+      label=_('Field ID'), id='field-f' ~ position ~ 'id',
+      value='', classes=['control-full']) }}
+
+    {{ form.select('info__' ~ position ~ '__type',
+      label=_('Type'), options=[
+      {'name': '', 'value': ''},
+      {'name': 'text', 'value': 'text'},
+      {'name': 'numeric', 'value': 'numeric'},
+      {'name': 'timestamp', 'value': 'timestamp'},
+      ]) }}
+
+    {{ form.select('info__' ~ position ~ '__type_override',
+      label=_('Type Override'), options=[
+      {'name': '', 'value': ''},
+      {'name': 'text', 'value': 'text'},
+      {'name': 'numeric', 'value': 'numeric'},
+      {'name': 'timestamp', 'value': 'timestamp'},
+      ], classes=['control-full'], attrs={'disabled': 'true'}) }}
+
+    {{ form.input('info__' ~ position ~ '__label',
+      label=_('Label'), id='field-f' ~ position ~ 'label',
+      value='', classes=['control-full']) }}
+
+    {{ form.markdown('info__' ~ position ~ '__notes',
+      label=_('Description'), id='field-d' ~ position ~ 'notes',
+      value='') }}
+
+  {% endif %}
+
+  <div class="control-group">
+    <a class="btn delete-field-button">
+      {% block delete_button_text %}
+        <span class="fa fa-trash-o" aria-hidden="true">
+        </span> {{ _('Delete') }}
+      {% endblock %}
+    </a>
+  </div>
+  <hr>
+</div>
