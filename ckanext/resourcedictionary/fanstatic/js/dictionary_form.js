@@ -12,7 +12,6 @@ ckan.module('dictionary_form', function ($) {
       $('#add-field-button').on('click', this._onAddField);
       $('.delete-field-button').on('click', this._onDeleteField);
     },
-
     _onAddField: function(event) {
       console.log(this._calculateFieldsNumber())
 
@@ -25,7 +24,6 @@ ckan.module('dictionary_form', function ($) {
     },
     // Delete event for removing selected field in the form
     _onDeleteField: function(event) {
-      console.log('delete')
       event.target.closest("div[class^='dictionary-field-']").remove();
     },
     // Callback function executed when requested snipped is received with success
