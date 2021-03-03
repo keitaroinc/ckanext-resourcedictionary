@@ -22,12 +22,12 @@ class ResourceDictionaryView(MethodView):
 
     def _prepare(self, id, resource_id):
         u'''Helper function that gets the available
-        data for the requested resource.
+        info for the requested resource.
 
         :param id: `string`, dataset id.
         :param resource_id: `string`, resource id.
 
-        :return: `tuple`, (`boolean`, `boolean`)
+        :return: `dict`, dictionary with resource info
         '''
         try:
             # resource_edit_base template uses these
