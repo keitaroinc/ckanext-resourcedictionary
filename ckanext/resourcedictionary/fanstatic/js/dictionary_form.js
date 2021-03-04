@@ -13,8 +13,6 @@ ckan.module('dictionary_form', function ($) {
       $('.delete-field-button').on('click', this._onDeleteField);
     },
     _onAddField: function(event) {
-      console.log(this._calculateFieldsNumber())
-
       // Send an ajax request to CKAN to render the dictionary_field.html
       // snippet with the position for the new field.
       var data = {

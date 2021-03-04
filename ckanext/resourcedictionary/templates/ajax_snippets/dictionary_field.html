@@ -5,28 +5,34 @@
   the 'info__' ~ position ~ '__namegoeshere' convention will be saved
   as part of the "info" object on the column.
 #}
+
+{% set options=[
+  {'text': '', 'value': ''},
+  {'text': 'Text', 'value': 'text'},
+  {'text': 'Integer', 'value': 'int4'},
+  {'text': 'Decimal', 'value': 'numeric'},
+  {'text': 'Float', 'value': 'float8'},
+  {'text': 'Date', 'value': 'date'},
+  {'text': 'Time', 'value': 'time'},
+  {'text': 'Timestamp', 'value': 'timestamp'},
+  {'text': 'Byte array', 'value': 'bytea'},
+  {'text': 'Array[Integer]', 'value': '_int4'},
+  {'text': 'Array[Text]', 'value': '_text'},
+  ] %}
+
+
 <div class="dictionary-field-{{ position }}">
-  {% if field %}
+  {% if field and total_records %}
 
-    {{ form.input('field__' ~ position ~ '__id',
-      label=_('Field ID'), id='field-f' ~ position ~ 'id',
-      value=field.get('id'), classes=['control-full']) }}
+    <h3>{{ _( "Field: ") }} {{ field.id }} ({{ field.type }})</h3>
 
-    {{ form.select('info__' ~ position ~ '__type',
-      label=_('Type'), options=[
-      {'name': '', 'value': ''},
-      {'name': 'text', 'value': 'text'},
-      {'name': 'numeric', 'value': 'numeric'},
-      {'name': 'timestamp', 'value': 'timestamp'},
-      ], selected=field.get('type')) }}
+    <input id="field__{{ position }}__id" type="text" name="field__{{ position }}__id" value="{{ field.get('id') | empty_and_escape }}" hidden />
+
+    <input id="info__{{ position }}__type" type="text" name="info__{{ position }}__type" value="{{ field.get('type') | empty_and_escape }}" hidden />
 
     {{ form.select('info__' ~ position ~ '__type_override',
-      label=_('Type Override'), options=[
-      {'name': '', 'value': ''},
-      {'name': 'text', 'value': 'text'},
-      {'name': 'numeric', 'value': 'numeric'},
-      {'name': 'timestamp', 'value': 'timestamp'},
-      ], selected=field.get('info', {}).get('type_override', '')) }}
+      label=_('Type Override'), options=options,
+      selected=field.get('info', {}).get('type_override', '')) }}
 
     {{ form.input('info__' ~ position ~ '__label',
       label=_('Label'), id='field-f' ~ position ~ 'label',
@@ -36,6 +42,30 @@
       label=_('Description'), id='field-d' ~ position ~ 'notes',
       value=field.get('info', {}).get('notes', '')) }}
 
+  {% elif field and not total_records %}
+
+    {{ form.input('field__' ~ position ~ '__id',
+      label=_('Field ID'), id='field-f' ~ position ~ 'id',
+      value=field.get('id'), classes=['control-full']) }}
+
+    {{ form.select('info__' ~ position ~ '__type',
+      label=_('Type'), options=options,
+      selected=field.get('type')) }}
+
+    {{ form.select('info__' ~ position ~ '__type_override',
+      label=_('Type Override'), options=options,
+      selected=field.get('info', {}).get('type_override', '')) }}
+
+    {{ form.input('info__' ~ position ~ '__label',
+      label=_('Label'), id='field-f' ~ position ~ 'label',
+      value=field.get('info', {}).get('label', ''), classes=['control-full']) }}
+
+    {{ form.markdown('info__' ~ position ~ '__notes',
+      label=_('Description'), id='field-d' ~ position ~ 'notes',
+      value=field.get('info', {}).get('notes', '')) }}
+
+    {% snippet "dictionary/snippets/delete_field_button.html" %}
+
   {% else %}
 
     {{ form.input('field__' ~ position ~ '__id',
@@ -43,20 +73,11 @@
       value='', classes=['control-full']) }}
 
     {{ form.select('info__' ~ position ~ '__type',
-      label=_('Type'), options=[
-      {'name': '', 'value': ''},
-      {'name': 'text', 'value': 'text'},
-      {'name': 'numeric', 'value': 'numeric'},
-      {'name': 'timestamp', 'value': 'timestamp'},
-      ]) }}
+      label=_('Type'), options=options) }}
 
     {{ form.select('info__' ~ position ~ '__type_override',
-      label=_('Type Override'), options=[
-      {'name': '', 'value': ''},
-      {'name': 'text', 'value': 'text'},
-      {'name': 'numeric', 'value': 'numeric'},
-      {'name': 'timestamp', 'value': 'timestamp'},
-      ], classes=['control-full'], attrs={'disabled': 'true'}) }}
+      label=_('Type Override'), options=options,
+      classes=['control-full'], attrs={'disabled': 'true'}) }}
 
     {{ form.input('info__' ~ position ~ '__label',
       label=_('Label'), id='field-f' ~ position ~ 'label',
@@ -66,15 +87,9 @@
       label=_('Description'), id='field-d' ~ position ~ 'notes',
       value='') }}
 
+    {% snippet "dictionary/snippets/delete_field_button.html" %}
+
   {% endif %}
 
-  <div class="control-group">
-    <a class="btn delete-field-button">
-      {% block delete_button_text %}
-        <span class="fa fa-trash-o" aria-hidden="true">
-        </span> {{ _('Delete') }}
-      {% endblock %}
-    </a>
-  </div>
   <hr>
 </div>

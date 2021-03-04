@@ -3,11 +3,14 @@ import ckan.plugins.toolkit as toolkit
 
 from ckanext.resourcedictionary.views.resource_dictionary \
     import resource_dictionary
+from ckanext.resourcedictionary.logic.action.create \
+    import resource_dictionary_create
 
 
 class ResourcedictionaryPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IBlueprint)
+    plugins.implements(plugins.IActions)
 
     # IConfigurer
 
@@ -21,3 +24,11 @@ class ResourcedictionaryPlugin(plugins.SingletonPlugin):
 
     def get_blueprint(self):
         return [resource_dictionary]
+
+    # IActions
+
+    def get_actions(self):
+        return {
+            u'resource_dictionary_create':
+                resource_dictionary_create
+        }

@@ -16,19 +16,22 @@
 
   <form method="post" action="{{ action }}" data-module="dictionary_form">
 
+    {{ form.errors(errors=error_summary) }}
+
     {% block dictionary_form %}
       {% for field in fields %}
-          {% snippet "ajax_snippets/dictionary_field.html", field=field, position=loop.index %}
+          {% snippet "ajax_snippets/dictionary_field.html", field=field, position=loop.index, total_records=total_records %}
       {% endfor %}
     {% endblock %}
 
     <button class="btn btn-primary" id="dictionary-save-button" name="save" type="submit">
       <i class="fa fa-book"></i> {{ _('Save') }}
     </button>
-
-    <a class="btn btn-info pull-right" id="add-field-button">
-      <span class="fa fa-plus-square"></span>
-      <span class="fa-label">{{_('Add Field')}}</span>
-    </a>
+    {% if not records %}
+      <a class="btn btn-info pull-right" id="add-field-button">
+        <span class="fa fa-plus-square"></span>
+        <span class="fa-label">{{_('Add Field')}}</span>
+      </a>
+    {% endif %}
   </form>
 {% endblock %}
