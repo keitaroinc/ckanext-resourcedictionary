@@ -1,4 +1,5 @@
 [![Tests](https://github.com/keitaroinc/ckanext-resourcedictionary/workflows/CI/badge.svg?branch=main)](https://github.com/keitaroinc/ckanext-resourcedictionary/actions)
+[![Coverage Status](https://coveralls.io/repos/github/keitaroinc/ckanext-resourcedictionary/badge.svg?branch=main)](https://coveralls.io/github/keitaroinc/ckanext-resourcedictionary?branch=main)
 
 # ckanext-resourcedictionary
 
