@@ -37,11 +37,11 @@ pip install -r requirements.txt
 pip install -r dev-requirements.txt
 cd -
 
-echo "Creating the PostgreSQL user and database..."
+echo "Creating the PostgreSQL users and databases..."
 psql -h localhost -U postgres -c "CREATE USER ckan_default WITH PASSWORD 'pass';"
 psql -h localhost -U postgres -c "CREATE USER datastore_default WITH PASSWORD 'pass';"
 psql -h localhost -U postgres -c 'CREATE DATABASE ckan_test WITH OWNER ckan_default;'
-psql -h localhost -U postgres -c 'CREATE DATABASE datastore_default WITH OWNER ckan_default;'
+psql -h localhost -U postgres -c 'CREATE DATABASE datastore_test WITH OWNER ckan_default;'
 
 echo "Setting datastore permissions..."
 cd ckan
