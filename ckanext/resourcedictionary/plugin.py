@@ -18,7 +18,7 @@ class ResourcedictionaryPlugin(plugins.SingletonPlugin):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic',
-            'resourcedictionary')
+                             'resourcedictionary')
 
     # IBlueprint
 

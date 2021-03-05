@@ -3,8 +3,7 @@ import logging
 
 import ckan.logic as logic
 from ckan.plugins.toolkit import (
-    ObjectNotFound, NotAuthorized, get_action, _, request,
-    abort, render, c, h
+    ObjectNotFound, NotAuthorized, get_action, _
 )
 
 log = logging.getLogger(__name__)

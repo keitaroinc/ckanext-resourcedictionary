@@ -18,8 +18,8 @@ setup(
     # http://packaging.python.org/en/latest/tutorial.html#version
     version='0.0.1',
 
-    description='''Extends the default CKAN Data Dictionary functionality 
-    by adding possibility to create data dictionary 
+    description='''Extends the default CKAN Data Dictionary functionality
+    by adding possibility to create data dictionary
     before actual data is uploaded to datastore.''',
     long_description=long_description,
     long_description_content_type="text/markdown",
