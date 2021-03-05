@@ -7,8 +7,7 @@ import ckan.tests.helpers as h
 from ckan.lib.helpers import url_for
 
 
-@pytest.mark.usefixtures(u'clean_db', u'clean_index',
-                         u'clean_datastore',)
+@pytest.mark.usefixtures(u'clean_db', u'clean_index')
 def test_create_new_resource_dictionary_successfully(app):
 
     user = factories.Sysadmin()
