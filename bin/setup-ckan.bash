@@ -43,12 +43,11 @@ psql -h localhost -U postgres -c "CREATE USER datastore_default WITH PASSWORD 'p
 psql -h localhost -U postgres -c 'CREATE DATABASE ckan_test WITH OWNER ckan_default;'
 psql -h localhost -U postgres -c 'CREATE DATABASE datastore_test WITH OWNER ckan_default;'
 
-echo "Setting datastore permissions..."
-cd ckan
-ckan -c test-core.ini datastore set-permissions
-
 echo "Initialising the database..."
+cd ckan
 ckan -c test-core.ini db init
+ckan -c test-core.ini datastore set-permissions > datastore_permisions.sql
+psql -h localhost -U postgres -f datastore_permisions.sql
 cd -
 
 echo "Installing ckanext-resourcedictionary and its requirements..."
