@@ -31,9 +31,10 @@ To install ckanext-resourcedictionary:
     pip install -e .
 	pip install -r requirements.txt
 
-3. Add `resourcedictionary` to the `ckan.plugins` setting in your CKAN
+3. Add `resourcedictionary` before the `datastore` to the `ckan.plugins` setting in your CKAN
    config file (by default the config file is located at
    `/etc/ckan/default/ckan.ini`).
+    e.g. `ckan.plugins = resourcedictionary datastore`
 
 4. Restart CKAN. For example if you've deployed CKAN with Apache on Ubuntu:
 
