@@ -26,19 +26,21 @@ To install ckanext-resourcedictionary:
 
 2. Clone the source and install it on the virtualenv
 
-    git clone https://github.com/keitaroinc/ckanext-resourcedictionary.git
-    cd ckanext-resourcedictionary
-    pip install -e .
-	pip install -r requirements.txt
+   ```
+   git clone https://github.com/keitaroinc/ckanext-resourcedictionary.git
+   cd ckanext-resourcedictionary
+   pip install -e .
+   pip install -r requirements.txt 
+   ```
 
 3. Add `resourcedictionary` before the `datastore` to the `ckan.plugins` setting in your CKAN
    config file (by default the config file is located at
-   `/etc/ckan/default/ckan.ini`).
-    e.g. `ckan.plugins = resourcedictionary datastore`
+   `/etc/ckan/default/ckan.ini`).\
+   `ckan.plugins = resourcedictionary datastore`
 
 4. Restart CKAN. For example if you've deployed CKAN with Apache on Ubuntu:
 
-     sudo service apache2 reload
+   ```sudo service apache2 reload```
 
 
 ## Config settings
