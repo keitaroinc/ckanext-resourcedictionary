@@ -104,7 +104,7 @@ If ckanext-resourcedictionary should be available on PyPI you can follow these s
   [2]: https://coveralls.io/github/keitaroinc/ckanext-resourcedictionary?branch=main
   [Gitter]: https://badges.gitter.im/keitaroinc/ckan.svg
   [3]: https://gitter.im/keitaroinc/ckan?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
-  [Python]: https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8-blue
+  [Python]: https://img.shields.io/badge/python-3.8-blue
   [4]: https://www.python.org
   [CKAN]: https://img.shields.io/badge/ckan-2.9-red
   [5]: https://www.ckan.org
