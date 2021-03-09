@@ -22,7 +22,7 @@ To install ckanext-resourcedictionary:
 
 1. Activate your CKAN virtual environment, for example:
 
-     . /usr/lib/ckan/default/bin/activate
+   ```. /usr/lib/ckan/default/bin/activate```
 
 2. Clone the source and install it on the virtualenv
 
