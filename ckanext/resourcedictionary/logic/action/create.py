@@ -58,6 +58,8 @@ def resource_dictionary_create(context, data_dict):
     for f in new_fields:
         if not f[u'type']:
             raise ValidationError({u'fields': [{u'type': _(u'Missing value')}]})
+        if not f[u'id']:
+            raise ValidationError({u'fields': [{u'id': _(u'Missing value')}]})
 
     # If the resource does not have any records in the datastore
     # then it is safe to delete the table and
