@@ -101,7 +101,7 @@ For resources that contain datastore records editing data dictionary is limited 
 
 **Code** : `409 CONFLICT`
 
-**Content example** : 
+**Content example**
 
 ```json
 {
