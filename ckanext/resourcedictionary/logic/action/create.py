@@ -59,9 +59,9 @@ def resource_dictionary_create(context, data_dict):
     res = {u'message': _(u'Data dictionary updated.')}
 
     for f in new_fields:
-        if not f[u'type']:
+        if u'type' not in f or not f[u'type']:
             raise ValidationError({u'fields': [{u'type': _(u'Missing value')}]})
-        if not f[u'id']:
+        if u'id' not in f or  not f[u'id']:
             raise ValidationError({u'fields': [{u'id': _(u'Missing value')}]})
 
     # If the resource does not have any records in the datastore
