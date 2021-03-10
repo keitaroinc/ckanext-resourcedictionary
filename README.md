@@ -58,6 +58,9 @@ do:
     python setup.py develop
     pip install -r dev-requirements.txt
 
+## API
+
+[Resource Dictionary API](ckanext/resourcedictionary/logic/action/resource_dictionary_create.md) : `POST /api/v3/resource_dictionary_create`
 
 ## Tests
 
