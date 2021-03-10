@@ -39,7 +39,10 @@ def _get_resource_datastore_info(resource_id):
     except (ObjectNotFound, NotAuthorized):
         # Continue even if no datastore record is found for the
         # current resource
-        return {}
+        return {
+            u'fields': [],
+            u'total_records': 0
+        }
 
 
 def resource_dictionary_create(context, data_dict):
@@ -47,11 +50,11 @@ def resource_dictionary_create(context, data_dict):
     '''
     _check_access('datastore_create', context, data_dict)
 
-    resource_id = data_dict[u'resource_id']
-    new_fields = data_dict[u'fields']
+    resource_id = data_dict.get(u'resource_id')
+    new_fields = data_dict.get(u'fields', [])
     resource_datastore_info = _get_resource_datastore_info(resource_id)
-    fields = resource_datastore_info.get(u'fields', [])
-    total_records = resource_datastore_info.get(u'total_records', 0)
+    fields = resource_datastore_info.get(u'fields')
+    total_records = resource_datastore_info.get(u'total_records')
 
     res = {u'message': _(u'Data dictionary updated.')}
 
