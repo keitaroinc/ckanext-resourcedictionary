@@ -4,8 +4,7 @@ set -e
 echo "This is setup-ckan.bash..."
 
 echo "Installing the packages that CKAN requires..."
-sudo apt-get update -qq
-sudo apt-get install xmlsec1 libxmlsec1-dev
+sudo apt-get update
 
 echo "Installing CKAN and its Python dependencies..."
 git clone https://github.com/ckan/ckan
