@@ -22,7 +22,8 @@ class ResourcedictionaryPlugin(plugins.SingletonPlugin):
 
         # Add `dictionary_fields` resource extra field in config
         # in order to add resource dictionary fields in SOLR index
-        config_[u'ckan.extra_resource_fields'] = u'dictionary_fields'
+        config_[u'ckan.extra_resource_fields'] = u'dictionary_fields ' \
+                                                 u'dictionary_labels'
 
     # IBlueprint
 

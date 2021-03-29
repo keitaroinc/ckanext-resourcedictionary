@@ -45,10 +45,11 @@ def _get_resource_datastore_info(resource_id):
         }
 
 
-def _update_dictionary_fields_extra(context, resource_id, fields):
-    u'''Helper function that adds dictionary fields as an extra
-    resource field called `dictionary_fields` in order to be indexed
-     by SOLR
+def _update_dictionary_fields_extras(context, resource_id, fields):
+    u'''Helper function that adds dictionary fields and
+    field labels as an extra resource fields called
+    `dictionary_fields` and `dictionary_labels` correspondingly
+     in order to be indexed by SOLR
 
     :param resource_id: `string`, resource id.
     :param fields: `list`, list of dictionary fields.
@@ -56,6 +57,7 @@ def _update_dictionary_fields_extra(context, resource_id, fields):
     '''
     res = get_action(u'resource_show')(context, {u'id': resource_id})
     res[u'dictionary_fields'] = u' '.join([f[u'id'] for f in fields])
+    res[u'dictionary_labels'] = u' '.join([f[u'info'][u'label'] for f in fields])
     get_action(u'resource_update')(context, res)
 
 
@@ -88,7 +90,9 @@ def resource_dictionary_create(context, data_dict):
                 u'force': True
             }
         )
+        _update_dictionary_fields_extras(context, resource_id, [])
         log.info(_(u'Data dictionary removed.'))
+
     if new_fields:
         res = get_action(u'datastore_create')(
             None, {
@@ -97,8 +101,7 @@ def resource_dictionary_create(context, data_dict):
                 u'fields': new_fields
             }
         )
-
-    _update_dictionary_fields_extra(context, resource_id, new_fields)
+        _update_dictionary_fields_extras(context, resource_id, new_fields)
 
     log.info(_(u'Data dictionary saved.'))
 
