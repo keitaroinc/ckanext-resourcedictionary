@@ -20,6 +20,10 @@ class ResourcedictionaryPlugin(plugins.SingletonPlugin):
         toolkit.add_resource('assets',
                              'resourcedictionary')
 
+        # Add `dictionary_fields` resource extra field in config
+        # in order to add resource dictionary fields in SOLR index
+        config_[u'ckan.extra_resource_fields'] = u'dictionary_fields'
+
     # IBlueprint
 
     def get_blueprint(self):
