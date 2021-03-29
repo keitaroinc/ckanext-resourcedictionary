@@ -57,7 +57,8 @@ def _update_dictionary_fields_extras(context, resource_id, fields):
     '''
     res = get_action(u'resource_show')(context, {u'id': resource_id})
     res[u'dictionary_fields'] = u' '.join([f[u'id'] for f in fields])
-    res[u'dictionary_labels'] = u' '.join([f[u'info'][u'label'] for f in fields])
+    res[u'dictionary_labels'] = u' '.join([f[u'info'][u'label'] for f in fields
+                                           if u'info' in f and u'label' in f[u'info']])
     get_action(u'resource_update')(context, res)
 
 
