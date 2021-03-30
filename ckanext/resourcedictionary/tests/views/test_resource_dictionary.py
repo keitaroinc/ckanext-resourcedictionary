@@ -194,7 +194,8 @@ def test_create_new_resource_dictionary_resource_not_found_error(app):
 
 
 @pytest.mark.usefixtures(u'clean_db', u'clean_index')
-@pytest.mark.ckan_config(u'ckan.extra_resource_fields', u'dictionary_fields')
+@pytest.mark.ckan_config(u'ckan.extra_resource_fields',
+                         u'dictionary_fields dictionary_labels')
 def test_resource_dictionary_fields_extra_created(app):
 
     user = factories.Sysadmin()
@@ -249,3 +250,149 @@ def test_resource_dictionary_fields_extra_created(app):
     assert 'Data dictionary updated.' in res.body
     assert u'dictionary_fields' in resource
     assert resource[u'dictionary_fields'] == u'Name Lastname'
+
+
+@pytest.mark.usefixtures(u'clean_db', u'clean_index')
+@pytest.mark.ckan_config(u'ckan.extra_resource_fields',
+                         u'dictionary_fields dictionary_labels')
+def test_resource_dictionary_fields_and_labels_extras_created(app):
+
+    user = factories.Sysadmin()
+    env = {u'REMOTE_USER': six.ensure_str(user[u'name'])}
+
+    context = {
+        u'user': six.ensure_str(user[u'name']),
+        u'ignore_auth': True
+    }
+    users = [{
+                u'name': six.ensure_str(user[u'name']),
+                u'capacity': 'admin'
+            }]
+
+    organization = h.call_action(u'organization_create',
+                                 context,
+                                 name='organization',
+                                 users=users)
+
+    package = h.call_action(u'package_create',
+                            context,
+                            name=u'package',
+                            owner_org=organization[u'id'])
+
+    resource = h.call_action(u'resource_create',
+                             context,
+                             name=u'resource',
+                             package_id=package[u'id'])
+
+    post_data = {
+        u'field__1__id': u'Name',
+        u'info__1__type': u'text',
+        u'info__1__label': u'Name Label',
+        u'field__2__id': u'Lastname',
+        u'info__2__type': u'text',
+        u'info__2__label': u'Lastname Label',
+    }
+
+    url = url_for(u'resource_dictionary.dictionary',
+                  id=package[u'id'],
+                  resource_id=resource[u'id'])
+
+    res = app.post(
+        url,
+        data=post_data,
+        extra_environ=env
+    )
+
+    resource = h.call_action(u'resource_show',
+                             context,
+                             id=resource[u'id'])
+
+    assert 200 == res.status_code
+    assert 'Data dictionary updated.' in res.body
+    assert u'dictionary_labels' in resource
+    assert resource[u'dictionary_labels'] == u'Name Label Lastname Label'
+
+
+@pytest.mark.usefixtures(u'clean_db', u'clean_index')
+@pytest.mark.ckan_config(u'ckan.extra_resource_fields',
+                         u'dictionary_fields dictionary_labels')
+def test_delete_resource_dictionary_fields_and_labels_extras(app):
+
+    user = factories.Sysadmin()
+    env = {u'REMOTE_USER': six.ensure_str(user[u'name'])}
+
+    context = {
+        u'user': six.ensure_str(user[u'name']),
+        u'ignore_auth': True
+    }
+    users = [{
+                u'name': six.ensure_str(user[u'name']),
+                u'capacity': 'admin'
+            }]
+
+    organization = h.call_action(u'organization_create',
+                                 context,
+                                 name='organization',
+                                 users=users)
+
+    package = h.call_action(u'package_create',
+                            context,
+                            name=u'package',
+                            owner_org=organization[u'id'])
+
+    resource = h.call_action(u'resource_create',
+                             context,
+                             name=u'resource',
+                             package_id=package[u'id'])
+
+    post_data = {
+        u'field__1__id': u'Name',
+        u'info__1__type': u'text',
+        u'info__1__label': u'Name Label',
+        u'field__2__id': u'Lastname',
+        u'info__2__type': u'text',
+        u'info__2__label': u'Lastname Label',
+    }
+
+    url = url_for(u'resource_dictionary.dictionary',
+                  id=package[u'id'],
+                  resource_id=resource[u'id'])
+
+    res = app.post(
+        url,
+        data=post_data,
+        extra_environ=env
+    )
+
+    resource = h.call_action(u'resource_show',
+                             context,
+                             id=resource[u'id'])
+    # Check all created
+    assert 200 == res.status_code
+    assert 'Data dictionary updated.' in res.body
+    assert u'dictionary_fields' in resource
+    assert resource[u'dictionary_fields'] == u'Name Lastname'
+    assert u'dictionary_labels' in resource
+    assert resource[u'dictionary_labels'] == u'Name Label Lastname Label'
+
+    post_data = {}
+    url = url_for(u'resource_dictionary.dictionary',
+                  id=package[u'id'],
+                  resource_id=resource[u'id'])
+
+    res = app.post(
+        url,
+        data=post_data,
+        extra_environ=env
+    )
+
+    resource = h.call_action(u'resource_show',
+                             context,
+                             id=resource[u'id'])
+    # Check all deleted
+    assert 200 == res.status_code
+    assert 'Data dictionary updated.' in res.body
+    assert u'dictionary_fields' in resource
+    assert u'dictionary_labels' in resource
+    assert resource[u'dictionary_fields'] == u''
+    assert resource[u'dictionary_labels'] == u''
