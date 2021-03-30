@@ -5,7 +5,7 @@
 Extends the default CKAN Data Dictionary functionality by adding possibility to create data dictionary before actual data is uploaded to datastore.
 For resources that don't have datastore records, the data dictionary can be edited in every way (adding/removing/editing fields) and even completely deleted.
 For resources that contain datastore records editing data dictionary is limited only to the info properties of a field.
-
+Resource dictionary fields and labels are added to the SOLR index as a resource extras.
 
 ## Requirements
 
