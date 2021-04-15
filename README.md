@@ -1,4 +1,4 @@
-[![CI][]][1] [![Coverage][]][2] [![Gitter][]][3] [![Python][]][4] [![CKAN][]][5]
+[![CI][]][1] [![Coverage][]][2] [![Gitter][]][3] [![Python][]][4] [![CKAN][]][5] [![PYPI][]][5]
 
 # ckanext-resourcedictionary
 
@@ -116,3 +116,5 @@ If ckanext-resourcedictionary should be available on PyPI you can follow these s
   [4]: https://www.python.org
   [CKAN]: https://img.shields.io/badge/ckan-2.9-red
   [5]: https://www.ckan.org
+  [Pypi]: https://img.shields.io/pypi/v/ckanext-resourcedictionary
+  [6]: https://pypi.org/project/ckanext-resourcedictionary
