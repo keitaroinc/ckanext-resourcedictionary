@@ -5,7 +5,7 @@ Creates new or updates existing data dictionary for a given CKAN resource.
 *Note:* For resources that don't have datastore records, the data dictionary can be edited in every way (adding/removing/editing fields) and even completely deleted.
 For resources that contain datastore records editing data dictionary is limited only to the info properties of a field.
 
-**URL** : `/api/v3/resource_dictionary_create`
+**URL** : `/api/v3/action/resource_dictionary_create`
 
 **Method** : `POST`
 
@@ -41,7 +41,7 @@ For resources that contain datastore records editing data dictionary is limited 
 
 # Delete resource data dictionary
 
-**URL** : `/api/v3/resource_dictionary_create`
+**URL** : `/api/v3/action/resource_dictionary_create`
 
 **Method** : `POST`
 
